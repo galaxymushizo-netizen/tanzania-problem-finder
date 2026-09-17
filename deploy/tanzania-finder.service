@@ -1,0 +1,19 @@
+[Unit]
+Description=Tanzania Problem Finder - Daily Agent Run
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/tanzania-problem-finder
+ExecStart=/usr/bin/python3 run_agent.py
+User=tanzania-finder
+Group=tanzania-finder
+Environment="PATH=/opt/tanzania-problem-finder/venv/bin"
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/tanzania-problem-finder/data
+PrivateTmp=true
